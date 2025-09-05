@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jasmin Painting Inc. - Professional Painting Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #1e3a5f;
+            --accent-red: #d32f2f;
+            --light-gray: #f5f5f5;
+            --text-dark: #333;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            width: 100%;
+            background: rgba(30, 58, 95, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(30,58,95,0.9), rgba(211,47,47,0.9)),
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,117.3C960,107,1056,149,1152,165.3C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            padding: 2rem;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: var(--white);
+            max-width: 800px;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            background: linear-gradient(45deg, #fff, #f0f0f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 2s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+            transform: translateY(-3px);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 2rem;
+            background: var(--white);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-blue);
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #f5f5f5, #ffffff);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .service-card:hover:before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Gallery Section */
+        .gallery {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f5f5f5, #e0e0e0);
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            background: var(--white);
+            cursor: pointer;
+            height: 300px;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        .gallery-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(30,58,95,0.9), transparent);
+            padding: 2rem 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-title {
+            color: var(--white);
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), #2e5a8e);
+            color: var(--white);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .contact-item {
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-5px);
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #0a1929;
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 3px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                right: -100%;
+                top: 70px;
+                flex-direction: column;
+                background: var(--primary-blue);
+                width: 200px;
+                text-align: center;
+                transition: 0.3s;
+                padding: 2rem 0;
+                border-radius: 0 0 0 20px;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 200px;
+            }
+        }
+
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <div class="logo-icon">🎨</div>
+                <span>Jasmin Painting Inc.</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1 class="floating">Jasmin Painting Inc.</h1>
+            <p>Professional Painting & Refinishing Services in Santa Rosa</p>
+            <p style="font-size: 1rem; opacity: 0.9;">Licensed & Insured • Lic. #1120243</p>
+            <div class="cta-buttons">
+                <a href="tel:7078607809" class="btn btn-primary">Call (707) 860-7809</a>
+                <a href="#gallery" class="btn btn-secondary">View Our Work</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="service-icon">🏠</div>
+                <h3>Residential Painting</h3>
+                <p>Transform your home with our expert interior and exterior painting services</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🏢</div>
+                <h3>Commercial Painting</h3>
+                <p>Professional painting solutions for businesses and commercial properties</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🎨</div>
+                <h3>Cabinet Refinishing</h3>
+                <p>Give your cabinets a fresh new look with our refinishing services</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">💧</div>
+                <h3>Pressure Washing</h3>
+                <p>Deep cleaning services to prepare surfaces for painting</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">🔨</div>
+                <h3>Staining</h3>
+                <p>Expert wood staining for decks, fences, and more</p>
+            </div>
+            <div class="service-card">
+                <div class="service-icon">✨</div>
+                <h3>Cleaning Services</h3>
+                <p>Complete cleaning solutions for your property</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery" id="gallery">
+        <h2 class="section-title">Our Recent Work</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #667eea, #764ba2); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">🏡</div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Modern Two-Story Exterior</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #f093fb, #f5576c); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">🎨</div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Interior Living Spaces</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #4facfe, #00f2fe); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">🍳</div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Modern Kitchen Design</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #43e97b, #38f9d7); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">🛁</div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Bathroom Renovation</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #fa709a, #fee140); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">🏠</div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Exterior Siding Work</div>
+                </div>
+            </div>
+            <div class="gallery-item">
+                <div style="background: linear-gradient(135deg, #30cfd0, #330867); height: 100%; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">✨</div>
+                <div class="gallery-overlay">
+                    <div class="gallery-title">Detail & Finishing</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="contact-content">
+            <h2 class="section-title" style="color: white;">Get In Touch</h2>
+            <p>Ready to transform your space? Contact us today for a free consultation!</p>
+            <div style="background: rgba(255,255,255,0.1); padding: 2rem; border-radius: 20px; margin: 2rem 0; backdrop-filter: blur(10px);">
+                <h3 style="margin-bottom: 1rem;">⭐ Client Testimonial</h3>
+                <p style="font-style: italic; font-size: 1.1rem;">"Jasmin Painting did an incredible job on our complete home transformation. From the modern two-story exterior with gray-blue siding to the stunning interior work with navy blue trim accents, every detail was perfect. The kitchen cabinet refinishing with two-tone colors exceeded our expectations. Highly recommended!"</p>
+                <p style="margin-top: 1rem; opacity: 0.9;">- Happy Homeowner, Santa Rosa</p>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">📱</div>
+                    <h3>Phone</h3>
+                    <p>(707) 860-7809</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📍</div>
+                    <h3>Location</h3>
+                    <p>Santa Rosa, CA 95403</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">📜</div>
+                    <h3>License</h3>
+                    <p>#1120243</p>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">⭐</div>
+                    <h3>BBB Rating</h3>
+                    <p>A- Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Jasmin Painting Inc. All rights reserved.</p>
+        <p>Licensed & Insured | Serving Santa Rosa and Surrounding Areas</p>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.classList.toggle('active');
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                // Close mobile menu if open
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.hero');
+            parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+        });
+
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card, .gallery-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
